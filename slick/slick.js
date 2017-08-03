@@ -1001,7 +1001,14 @@
 
             _.$slideTrack.children(this.options.slide).detach();
 
-            _.$slidesCache.filter(filter).appendTo(_.$slideTrack);
+            var newIndex = 0;
+            _.$slidesCache.filter(filter).each(function(index){
+                if ($(this).attr('data-slick-index') == _.currentSlide) {
+                    newIndex = index;
+                }
+                $(this).attr('data-slick-index', index);
+            }).appendTo(_.$slideTrack);
+            _.currentSlide = newIndex;
 
             _.reinit();
 
@@ -2867,7 +2874,14 @@
 
             _.$slideTrack.children(this.options.slide).detach();
 
-            _.$slidesCache.appendTo(_.$slideTrack);
+            var newIndex = 0;
+            _.$slidesCache.each(function(index){
+                if ($(this).attr('data-slick-index') == _.currentSlide) {
+                    newIndex = index;
+                }
+                $(this).attr('data-slick-index', index);
+            }).appendTo(_.$slideTrack);
+            _.currentSlide = newIndex;
 
             _.reinit();
 
